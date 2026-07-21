@@ -1,4 +1,4 @@
-package com.leetjourney.ingestion_service;
+package com.homeenergytracker.ingestion_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
