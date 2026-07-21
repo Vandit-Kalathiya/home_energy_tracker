@@ -12,6 +12,11 @@ services:
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - db-data:/var/lib/mysql
       - db-data:/var/log/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -ppassword || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   kafka:
     container_name: kafka
@@ -84,6 +89,12 @@ services:
 
     volumes:
       - ./docker/kafka_data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions.sh --bootstrap-server localhost:9092 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 10s
 
   kafka-ui:
     container_name: kafka-ui
@@ -113,6 +124,11 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-token
     volumes:
       - ./influxdb_data:/var/lib/influxdb2
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   mailpit:
     image: axllent/mailpit:latest
