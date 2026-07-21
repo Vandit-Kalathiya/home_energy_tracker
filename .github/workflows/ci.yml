@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-validate:
     runs-on: ubuntu-latest
+    env:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: 127.0.0.1:9094
 
     steps:
       - name: Checkout codebase

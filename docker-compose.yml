@@ -53,12 +53,9 @@ services:
         EXTERNAL://0.0.0.0:9094,
         CONTROLLER://0.0.0.0:9093
 
-      # What each listener advertises to connecting clients
-      # Internal (Docker containers): kafka:9092
-      # External (host machine): localhost:9094
       KAFKA_ADVERTISED_LISTENERS: >
         PLAINTEXT://kafka:9092,
-        EXTERNAL://localhost:9094
+        EXTERNAL://127.0.0.1:9094
 
       # Maps listener names to their security protocols
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: >
